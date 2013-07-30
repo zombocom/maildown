@@ -2,8 +2,8 @@ PATH
   remote: .
   specs:
     maildown (0.0.1)
-      actionmailer (> 3.2.0)
       kramdown
+      rails (> 3.2.0)
 
 GEM
   remote: https://rubygems.org/
@@ -87,5 +87,4 @@ PLATFORMS
 
 DEPENDENCIES
   maildown!
-  rails (> 3.2.0)
   sqlite3
