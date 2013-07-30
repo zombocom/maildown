@@ -1,4 +1,3 @@
-require "maildown/engine"
 require 'kramdown'
 
 module Maildown
