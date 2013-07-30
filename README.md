@@ -2,6 +2,8 @@
 
 [Markdown](http://daringfireball.net/projects/markdown/syntax) for your ActionMailer generated emails
 
+[![Build Status](https://travis-ci.org/schneems/maildown.png)](https://travis-ci.org/schneems/maildown)
+
 ## What?
 
 - Fact: You should always send emails in `text/html` and `text/plain` at the same time
