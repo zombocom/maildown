@@ -34,6 +34,20 @@ Once you've got a file named `.md.erb` in your mailer directory, I recommend ver
 
 View helpers in markdown such as `link_to` are not modified by this gem, so they will produce html style links `<a href="#..."></a>` instead of markdown style links `[]()`. It will only affect your plain text users (such as those using [mutt](http://www.mutt.org/), and is still better than not supporting text email at all).
 
+To get great looking emails in both html and plaintext generate your own links like this:
+
+```ruby
+[Your Profile](<%= user_url(@user) %>)
+```
+
+Instead of
+
+```ruby
+<%= link_to "Your Profile", user_url(@user) %>
+```
+
+Bonus: it's shorter!
+
 ## Future
 
 This codebase depends on some metaprogramming to convince Action Mailer to render html and plain text from md. If you've got some ideas on how to add sane hooks into actionmailer to support this functionality more natively ping me [@schneems](http://twitter.com/schneems)
