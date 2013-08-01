@@ -30,9 +30,20 @@ In your `app/views<mailer>` directory create a file with a `.md.erb` extension. 
 
 Once you've got a file named `.md.erb` in your mailer directory, I recommend verifing the format in your browser in development using a tool such as [mail_view](https://github.com/37signals/mail_view). You can toggle between html and text at the top to make sure both look like you expect.
 
-## Helpers in Markdown files
+## Configure Markdown Renderer
 
-View helpers in markdown such as `link_to` are not modified by this gem, so they will produce html style links `<a href="#..."></a>` instead of markdown style links `[]()`. It will only affect your plain text users (such as those using [mutt](http://www.mutt.org/), and is still better than not supporting text email at all).
+By default maildown uses the [kramdown](https://github.com/gettalong/kramdown) markdown parser by default. Kramdown is pure ruby, so it runs the same across all ruby implementations: jruby, rubinius, MRI, etc. You can configure another parser if you like using the `Maildown::MarkdownEngine.set` method and pasing it a block. If you wanted to use Redcarpet you could set it like this:
+
+```ruby
+Maildown::MarkdownEngine.set do |text|
+  carpet = Redcarpet::Markdown.new(Redcarpet::Render::HTML, {})
+  carpet.render(text).html_safe
+end
+```
+
+When maildown needs an html document the block will be called with the markdown text. The result should be html.
+
+## Helpers in Markdown files
 
 To get great looking emails in both html and plaintext generate your own links like this:
 
@@ -51,6 +62,11 @@ Bonus: it's shorter!
 ## Future
 
 This codebase depends on some metaprogramming to convince Action Mailer to render html and plain text from md. If you've got some ideas on how to add sane hooks into actionmailer to support this functionality more natively ping me [@schneems](http://twitter.com/schneems)
+
+
+## Alternative Implementations
+
+There is another project that accomplishes the same thing by plataformatec: [markerb](https://github.com/plataformatec/markerb).
 
 ## License
 
