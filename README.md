@@ -1,6 +1,6 @@
 # Maildown
 
-[Markdown](http://daringfireball.net/projects/markdown/syntax) for your ActionMailer generated emails
+[Markdown](http://daringfireball.net/projects/markdown/syntax) for your ActionMailer generated emails. Supports Rails 4.0+
 
 [![Build Status](https://travis-ci.org/schneems/maildown.png)](https://travis-ci.org/schneems/maildown)
 
