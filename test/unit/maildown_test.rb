@@ -7,7 +7,6 @@ class MaildownTest < ActiveSupport::TestCase
     assert_equal parses_responses, md.to_responses
   end
 
-
   test "no md in response" do
     md = ::Maildown::Md.new([])
     refute md.contains_md?
