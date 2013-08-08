@@ -5,7 +5,11 @@ module Maildown
     end
 
     def self.set(&block)
-      Thread.current[:maildown_markdown_engine_block] ||= block
+      Thread.current[:maildown_markdown_engine_block] = block
+    end
+
+    def self.block
+      Thread.current[:maildown_markdown_engine_block]
     end
   end
 end
