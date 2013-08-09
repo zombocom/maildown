@@ -1,9 +1,9 @@
 PATH
   remote: .
   specs:
-    maildown (0.0.1)
+    maildown (1.0.1)
       kramdown
-      rails (> 3.2.0)
+      rails (>= 4.0.0)
 
 GEM
   remote: https://rubygems.org/
