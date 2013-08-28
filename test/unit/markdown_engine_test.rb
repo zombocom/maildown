@@ -16,4 +16,11 @@ class MarkdownEngineTest < ActiveSupport::TestCase
     end
     assert_equal "foo: bar", Maildown::MarkdownEngine.to_html("bar")
   end
+
+  test "default works in multiple threads" do
+    thread = Thread.new do
+      assert_equal "<p>bar</p>\n", Maildown::MarkdownEngine.to_html("bar")
+    end
+    thread.join
+  end
 end

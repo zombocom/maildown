@@ -1,7 +1,7 @@
 module Maildown
   module MarkdownEngine
     def self.to_html(string)
-      Thread.current[:maildown_markdown_engine_block].call(string)
+      block.call(string)
     end
 
     def self.set(&block)
@@ -9,11 +9,11 @@ module Maildown
     end
 
     def self.block
-      Thread.current[:maildown_markdown_engine_block]
+      Thread.current[:maildown_markdown_engine_block] || default
+    end
+
+    def self.default
+      ->(string) { Kramdown::Document.new(string).to_html }
     end
   end
-end
-
-Maildown::MarkdownEngine.set do |string|
-  Kramdown::Document.new(string).to_html
 end
