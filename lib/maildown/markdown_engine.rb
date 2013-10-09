@@ -13,6 +13,8 @@ module Maildown
     end
 
     def self.default
+      require 'kramdown' unless defined? Kramdown
+
       ->(string) { Kramdown::Document.new(string).to_html }
     end
   end
