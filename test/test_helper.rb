@@ -3,6 +3,7 @@ ENV["RAILS_ENV"] = "test"
 
 require File.expand_path("../dummy/config/environment.rb",  __FILE__)
 require "rails/test_help"
+require "kramdown"
 
 Rails.backtrace_cleaner.remove_silencers!
 
@@ -13,7 +14,6 @@ Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 # if ActiveSupport::TestCase.method_defined?(:fixture_path=)
 #   ActiveSupport::TestCase.fixture_path = File.expand_path("../fixtures", __FILE__)
 # end
-
 
 def orig_text_response
   {:body=>"Hi,\n\n##\n\n\nName:\n  test_to_yaml_with_time_with_zone_should_not_raise_exception\nLocation:\n  https://github.com/rails/rails/blob/master/test/cases/yaml_serialization_test.rb/#L7\nName:\n  test_roundtrip\nLocation:\n  https://github.com/rails/rails/blob/master/test/cases/yaml_serialization_test.rb/#L20\nName:\n  test_roundtrip_serialized_column\nLocation:\n  https://github.com/rails/rails/blob/master/test/cases/yaml_serialization_test.rb/#L27\nName:\n  test_encode_with_coder\nLocation:\n  https://github.com/rails/rails/blob/master/test/cases/yaml_serialization_test.rb/#L32\nName:\n  test_psych_roundtrip\nLocation:\n  https://github.com/rails/rails/blob/master/test/cases/yaml_serialization_test.rb/#L39\nName:\n  test_psych_roundtrip_new_object\nLocation:\n  https://github.com/rails/rails/blob/master/test/cases/yaml_serialization_test.rb/#L46\n\n--\n@schneems\n", :content_type=>"text/plain"}.dup
