@@ -16,7 +16,7 @@ So why not write your templates once in markdown, and have them translated to te
 
 Gemfile:
 
-```
+```ruby
 gem 'maildown'
 ```
 
@@ -32,7 +32,12 @@ Once you've got a file named `.md.erb` in your mailer directory, I recommend ver
 
 ## Configure Markdown Renderer
 
-By default maildown uses the [kramdown](https://github.com/gettalong/kramdown) markdown parser by default. Kramdown is pure ruby, so it runs the same across all ruby implementations: jruby, rubinius, MRI, etc. You can configure another parser if you like using the `Maildown::MarkdownEngine.set` method and pasing it a block. If you wanted to use Redcarpet you could set it like this:
+Maildown uses [kramdown](https://github.com/gettalong/kramdown) by default.
+Kramdown is pure ruby, so it runs the same across all ruby implementations:
+jruby, rubinius, MRI, etc. You can configure another parser if you like using
+the `Maildown::MarkdownEngine.set` method and pasing it a block.
+
+For example, if you wanted to use Redcarpet you could set it like this:
 
 ```ruby
 Maildown::MarkdownEngine.set do |text|
@@ -41,7 +46,8 @@ Maildown::MarkdownEngine.set do |text|
 end
 ```
 
-When maildown needs an html document the block will be called with the markdown text. The result should be html.
+When maildown needs an html document the block will be called with the markdown
+text. The result should be html.
 
 ## Helpers in Markdown files
 

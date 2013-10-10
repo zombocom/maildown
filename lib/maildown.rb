@@ -1,5 +1,3 @@
-require 'kramdown'
-
 module Maildown
 end
 
