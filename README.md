@@ -24,7 +24,7 @@ Then run `$ bundle install`
 
 ## Use
 
-In your `app/views<mailer>` directory create a file with a `.md.erb` extension. When rails renders the email, it will generate html by parsing the markdown, and generate plain text by sending the email as is.
+In your `app/views/<mailer>` directory create a file with a `.md.erb` extension. When rails renders the email, it will generate html by parsing the markdown, and generate plain text by sending the email as is.
 
 ## Verify
 
