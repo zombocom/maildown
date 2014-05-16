@@ -5,8 +5,8 @@ Mime::Type.register "text/md", :md, [], %w(md)
 class ActionMailer::Base
   alias :original_collect_responses :collect_responses
 
-  def collect_responses(*args)
-    responses = original_collect_responses(*args)
+  def collect_responses(*args, &block)
+    responses = original_collect_responses(*args, &block)
     md = ::Maildown::Md.new(responses)
     if md.contains_md?
       return md.to_responses
