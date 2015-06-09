@@ -9,7 +9,8 @@ class ExtActionMailerTest < ActiveSupport::TestCase
 
   test "default types on action mailer base" do
     expected = [:html, :text, :js, :css, :ics, :csv, :png, :jpeg, :gif, :bmp, :tiff, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :md]
-    assert_equal expected, ActionMailer::Base.view_context_class.default_formats
+    actual   = ActionMailer::Base.view_context_class.default_formats
+    assert_equal actual.include?(:md), true, "Expected #{actual.inspect} to include :md but it did not"
   end
 
   test "monkeypatch location" do
