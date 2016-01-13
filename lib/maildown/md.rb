@@ -4,8 +4,8 @@ module Maildown
 
     # responses is an array of hashes containing a body: and :content_type
     def initialize(responses)
-      @responses  = responses.reject {|r| r[:content_type] == Mime::HTML.to_s || r[:content_type] == Mime::TEXT.to_s }
-      md_response = responses.detect {|r| r[:content_type] == Mime::MD.to_s }
+      @responses  = responses.reject {|r| r[:content_type] == Mime[:html].to_s || r[:content_type] == Mime[:text].to_s }
+      md_response = responses.detect {|r| r[:content_type] == Mime[:md].to_s }
       if md_response.present?
         @string = md_response[:body]
         @responses.delete(md_response)
