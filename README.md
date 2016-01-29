@@ -28,7 +28,7 @@ In your `app/views/<mailer>` directory create a file with a `.md.erb` extension.
 
 ## Verify
 
-Once you've got a file named `.md.erb` in your mailer directory, I recommend verifing the format in your browser in development using a tool such as [mail_view](https://github.com/37signals/mail_view). You can toggle between html and text at the top to make sure both look like you expect.
+Once you've got a file named `.md.erb` in your mailer directory, I recommend verifing the format in your browser in development using a tool such as [mail_view](https://github.com/basecamp/mail_view). You can toggle between html and text at the top to make sure both look like you expect.
 
 ## Configure Markdown Renderer
 
@@ -67,7 +67,7 @@ Bonus: it's shorter!
 
 ## Future
 
-This codebase depends on some metaprogramming to convince Action Mailer to render html and plain text from md. If you've got some ideas on how to add sane hooks into actionmailer to support this functionality more natively ping me [@schneems](http://twitter.com/schneems)
+This codebase depends on some metaprogramming to convince Action Mailer to render html and plain text from md. If you've got some ideas on how to add sane hooks into actionmailer to support this functionality more natively ping me [@schneems](https://twitter.com/schneems)
 
 
 ## Alternative Implementations
