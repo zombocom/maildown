@@ -23,4 +23,15 @@ class MarkdownEngineTest < ActiveSupport::TestCase
     end
     thread.join
   end
+
+  test "custom engine works in multiple threads" do
+    Maildown::MarkdownEngine.set do |text|
+      "foo: #{text}"
+    end
+
+    thread = Thread.new do
+      assert_equal "foo: bar", Maildown::MarkdownEngine.to_html("bar")
+    end
+    thread.join
+  end
 end
