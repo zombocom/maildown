@@ -1,3 +1,5 @@
+require 'action_mailer'
+
 mail_view_klass = ActionMailer::Base.view_context_class
 mail_view_klass.default_formats = (mail_view_klass.default_formats << :md)
 Mime::Type.register "text/md", :md, [], %w(md)
