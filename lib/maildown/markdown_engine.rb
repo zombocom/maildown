@@ -1,5 +1,3 @@
-require 'active_support'
-
 module Maildown
   module MarkdownEngine
     def self.to_html(string)
@@ -10,13 +8,17 @@ module Maildown
       text_block.call(string)
     end
 
+    def self.set_html(&block)
+      @maildown_markdown_engine_html_block = block
+    end
+
     def self.set(&block)
       set_html(&block)
     end
-    singleton_class.deprecate set: :set_html
 
-    def self.set_html(&block)
-      @maildown_markdown_engine_html_block = block
+    class << self
+      extend Gem::Deprecate
+      deprecate :set, :set_html, 2017, 6
     end
 
     def self.set_text(&block)
