@@ -13,7 +13,7 @@ module Maildown
     end
 
     def to_text
-      string
+      Maildown::MarkdownEngine.to_text(string)
     end
 
     def to_html
