@@ -35,12 +35,12 @@ Once you've got a file named `.md.erb` in your mailer directory, I recommend ver
 Maildown uses [kramdown](https://github.com/gettalong/kramdown) by default.
 Kramdown is pure ruby, so it runs the same across all ruby implementations:
 jruby, rubinius, MRI, etc. You can configure another parser if you like using
-the `Maildown::MarkdownEngine.set` method and pasing it a block.
+the `Maildown::MarkdownEngine.set_html` method and pasing it a block.
 
 For example, if you wanted to use Redcarpet you could set it like this:
 
 ```ruby
-Maildown::MarkdownEngine.set do |text|
+Maildown::MarkdownEngine.set_html do |text|
   carpet = Redcarpet::Markdown.new(Redcarpet::Render::HTML, {})
   carpet.render(text).html_safe
 end
@@ -48,6 +48,16 @@ end
 
 When maildown needs an html document the block will be called with the markdown
 text. The result should be html.
+
+You can also customize the renderer for plain text. By default the text is 
+passed through unmodified, but you may wish to use Kramdown to strip HTML tags,
+unify formatting etc.
+
+```ruby
+Maildown::MarkdownEngine.set_text do |text|
+  Kramdown::Document.new(text).tap(&:to_remove_html_tags).to_kramdown
+end
+```
 
 ## Helpers in Markdown files
 
