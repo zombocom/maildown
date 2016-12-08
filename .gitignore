@@ -8,3 +8,4 @@ test/dummy/tmp/
 test/dummy/.sass-cache
 *.gem
 .ruby-version
+.DS_Store

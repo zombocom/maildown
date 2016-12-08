@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency "actionmailer", ">= 4.0.0"
   s.add_dependency "kramdown"
 
+  s.add_development_dependency "railties"
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rake"
 end
