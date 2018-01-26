@@ -2,7 +2,7 @@
 
 [Markdown](http://daringfireball.net/projects/markdown/syntax) for your ActionMailer generated emails. Supports Rails 5.0+
 
-[![Build Status](https://travis-ci.org/schneems/maildown.png)](https://travis-ci.org/schneems/maildown)
+[![Build Status](https://travis-ci.org/schneems/maildown.svg?branch=schneems%2F2.0.0)](https://travis-ci.org/schneems/maildown)
 
 ## What?
 
@@ -49,7 +49,7 @@ end
 When maildown needs an html document the block will be called with the markdown
 text. The result should be html.
 
-You can also customize the renderer for plain text. By default the text is 
+You can also customize the renderer for plain text. By default the text is
 passed through unmodified, but you may wish to use Kramdown to strip HTML tags,
 unify formatting etc.
 
