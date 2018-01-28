@@ -3,6 +3,7 @@
 [Markdown](http://daringfireball.net/projects/markdown/syntax) for your ActionMailer generated emails. Supports Rails 5.0+
 
 [![Build Status](https://travis-ci.org/schneems/maildown.svg?branch=schneems%2F2.0.0)](https://travis-ci.org/schneems/maildown)
+[![Help Contribute to Open Source](https://www.codetriage.com/schneems/maildown/badges/users.svg)](https://www.codetriage.com/schneems/maildown)
 
 ## What?
 
