@@ -9,24 +9,26 @@ class MaildownTest < ActiveSupport::TestCase
 
 
   test "allow indentation strips leading whitespace" do
-    Maildown.allow_indentation = true
+    begin
+      Maildown.allow_indentation = true
 
-    string = "foo"
+      string = "foo"
 
-    md = ::Maildown::Md.new(string_to_response_array("\n    #{string}"))
-    assert md.contains_md?
+      md = ::Maildown::Md.new(string_to_response_array("\n    #{string}"))
+      assert md.contains_md?
 
-    expected = [{
-                 body:         "\n#{string}",
-                 content_type: "text/plain"
-                },
-                {
-                 body:         "\n<p>#{string}</p>\n",
-                 content_type: "text/html"
-                }]
-    assert_equal expected, md.to_responses
-  ensure
-    Maildown.allow_indentation = false
+      expected = [{
+                   body:         "\n#{string}",
+                   content_type: "text/plain"
+                  },
+                  {
+                   body:         "\n<p>#{string}</p>\n",
+                   content_type: "text/html"
+                  }]
+      assert_equal expected, md.to_responses
+    ensure
+      Maildown.allow_indentation = false
+    end
   end
 
   test "whitespace is not stripped by default" do
