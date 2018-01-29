@@ -3,12 +3,11 @@ require 'test_helper'
 class ExtActionMailerTest < ActiveSupport::TestCase
 
   test "correctly registered md mime type" do
-    assert_equal Mime::MD, Mime::Type.lookup("text/md")
-    assert_equal "text/md", Mime::MD.to_s
+    assert_equal Mime[:md], Mime::Type.lookup("text/md")
+    assert_equal "text/md", Mime[:md].to_s
   end
 
   test "default types on action mailer base" do
-    expected = [:html, :text, :js, :css, :ics, :csv, :png, :jpeg, :gif, :bmp, :tiff, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :md]
     actual   = ActionMailer::Base.view_context_class.default_formats
     assert_equal actual.include?(:md), true, "Expected #{actual.inspect} to include :md but it did not"
   end

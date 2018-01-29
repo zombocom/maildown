@@ -25,6 +25,8 @@ module Maildown
       @maildown_markdown_engine_text_block = block
     end
 
+    @maildown_markdown_engine_html_block = nil
+    @maildown_markdown_engine_text_block = nil
     def self.html_block
       @maildown_markdown_engine_html_block || default_html_block
     end

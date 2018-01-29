@@ -1,4 +1,13 @@
 module Maildown
+  @allow_indentations = false
+
+  def self.allow_indentation
+    @allow_indentations
+  end
+
+  def self.allow_indentation=(allow_indentations)
+    @allow_indentations = allow_indentations
+  end
 end
 
 require 'maildown/markdown_engine'

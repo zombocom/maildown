@@ -27,7 +27,32 @@ Then run `$ bundle install`
 
 In your `app/views/<mailer>` directory create a file with a `.md.erb` extension. When rails renders the email, it will generate html by parsing the markdown, and generate plain text by sending the email as is.
 
-## Verify
+We recommend setting:
+
+```ruby
+Maildown.allow_indentation = true
+```
+
+This allows you to indent the code in your markdown templates, for example:
+
+```
+<% if @write_docs.present? %>
+  ## Write Docs
+
+    <% @write_docs.sort_by {|d| d.repo.full_name }.each do |doc| %>
+    **<%= doc.repo.full_name %>** ([source](<%= doc.to_github %>)): [<%= doc.path %>](<%= doc_method_url doc %>)
+
+  <% end %>
+<% end %>
+```
+
+This is needed because markdown by default treats indentations as a blockquote. Which is why it's not the default. If you enable this setting you'll need to use backticks to indicate a blockquote.
+
+    ```
+    This is a block quote using backticks
+    ```
+
+## Verify Installation
 
 Once you've got a file named `.md.erb` in your mailer directory, I recommend verifing the format in your browser in development using a tool such as [mail_view](https://github.com/basecamp/mail_view). You can toggle between html and text at the top to make sure both look like you expect.
 
