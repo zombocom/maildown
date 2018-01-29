@@ -1,4 +1,6 @@
 module Maildown
+  @allow_indentations = false
+
   def self.allow_indentations
     @allow_indentations
   end
