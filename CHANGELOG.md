@@ -1,3 +1,7 @@
+## 2.0.2
+
+- Add support for "allow indentation". When `Maildown.allow_indentation = true`. This allows erb markdown templates to be indented but disables blockquotes via spaces. More information is available in the readme.
+
 ## 2.0.1
 
 ???
