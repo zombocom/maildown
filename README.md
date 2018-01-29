@@ -29,7 +29,7 @@ In your `app/views/<mailer>` directory create a file with a `.md.erb` extension.
 We recommend setting:
 
 ```ruby
-Maildown.allow_indentations = true
+Maildown.allow_indentation = true
 ```
 
 This allows you to indent the code in your markdown templates, for example:

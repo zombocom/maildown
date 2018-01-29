@@ -52,6 +52,23 @@ def parsed_html_response
   }
 end
 
+def string_to_response_array(string)
+  [
+    {
+      body:         string,
+      content_type: "text/plain"
+    }.dup,
+    {
+      body:         string,
+      content_type: "text/html"
+    }.dup,
+    {
+      body:         string,
+      content_type: "text/md"
+    }.dup,
+  ]
+end
+
 def parses_responses
   [orig_text_response, parsed_html_response]
 end

@@ -9,7 +9,7 @@ module Maildown
       if md_response.present?
         @string = md_response[:body]
         # Match beginning whitespace but not newline http://rubular.com/r/uCXQ58OOC8
-        @string.gsub!(/^[^\S\n]+/, ''.freeze) if Maildown.allow_indentations
+        @string.gsub!(/^[^\S\n]+/, ''.freeze) if Maildown.allow_indentation
 
         @responses.delete(md_response)
       end
