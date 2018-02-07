@@ -1,5 +1,6 @@
 module Maildown
   @allow_indentations = false
+  @enable_layouts     = false
 
   def self.allow_indentation
     @allow_indentations
@@ -7,6 +8,14 @@ module Maildown
 
   def self.allow_indentation=(allow_indentations)
     @allow_indentations = allow_indentations
+  end
+
+  def self.enable_layouts
+    @enable_layouts
+  end
+
+  def self.enable_layouts=(enable_layouts)
+    @enable_layouts = enable_layouts
   end
 end
 

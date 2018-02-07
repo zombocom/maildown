@@ -27,13 +27,95 @@ Then run `$ bundle install`
 
 In your `app/views/<mailer>` directory create a file with a `.md.erb` extension. When rails renders the email, it will generate html by parsing the markdown, and generate plain text by sending the email as is.
 
-We recommend setting:
+## Verify Installation
+
+Once you've got a file named `.md.erb` in your mailer directory, I recommend verifing the format in your browser in development using a tool such as [mail_view](https://github.com/basecamp/mail_view). You can toggle between html and text at the top to make sure both look like you expect.
+
+## Advanced Features
+
+### Different HTML/Text Layouts
+
+The way layouts work with the Rails mailer is they're based on your content type. Since our source file is a `.md.erb` it will automatically use a markdown layout as well. That's fine if you want a markdown layout, but what if you want to add styles to only your HTML email?
+
+Enable this feature and you can use HTML layouts:
+
+```ruby
+Maildown.enable_layouts = true
+```
+
+Now in your mailer you can set a layout:
+
+```ruby
+class UserMailer < ActionMailer::Base
+  layout "mail_layout"
+
+  # ...
+```
+
+Now when your render a markdown email it will look for `layouts/mail_layout.html.erb` and `layouts/mail_layout.text.erb` files.
+
+Here's an example of a styled HTML layout
+
+```erb
+<% # layouts/mail_layout.html.erb %>
+<%= stylesheet_link_tag "markdown.css" %>
+
+<div class="readme">
+  <article class="markdown-body">
+    <%= yield %>
+  </article>
+</div>
+```
+
+You can leave the text version plain if you want, but don't forget to add a `yield` or it won't render
+
+```erb
+<%= yield %>
+```
+
+This does not currently work with format blocks in your mailer
+
+```ruby
+# THIS DOES NOT WORK
+mail(to: user.email) do |format|
+  format.html { render layout: 'my_layout' }
+  format.text
+end
+# THIS DOES NOT WORK
+```
+
+If you need to have different layouts for different views I suggest you make a different mailer.
+
+This layout mechanism may behave differently than you are used to. For example the layout actually gets added after your main view is rendered. This means you cannot mutate variables in your layout and expect that to show up in your view.
+
+Also the ERB template still works in tandem with this feature. However, it gets applied before any HTML or TEXT templates.
+
+This whole library is a giant pile of hacks, so this might not behave as you want.
+
+### Indentation
+
+In markdown when you indent your text it gets treated as a code block. This means if you're looping or branching in your markdown view, you cannot indent your code if you want it to show up fine. You end up writing code that looks like this:
+
+```
+<% if @write_docs.present? %>
+## Write Docs
+
+<% @write_docs.sort_by {|d| d.repo.full_name }.each do |doc| %>
+**<%= doc.repo.full_name %>** ([source](<%= doc.to_github %>)): [<%= doc.path %>](<%= doc_method_url doc %>)
+
+<% end %>
+<% end %>
+```
+
+Gross.
+
+To get around this, you can set this flag:
 
 ```ruby
 Maildown.allow_indentation = true
 ```
 
-This allows you to indent the code in your markdown templates, for example:
+Now you can indent your code:
 
 ```
 <% if @write_docs.present? %>
@@ -46,15 +128,15 @@ This allows you to indent the code in your markdown templates, for example:
 <% end %>
 ```
 
-This is needed because markdown by default treats indentations as a blockquote. Which is why it's not the default. If you enable this setting you'll need to use backticks to indicate a blockquote.
+If you want to use a code block, you can use backticks instead of indentation:
 
     ```
-    This is a block quote using backticks
+    This is a code block using backticks
     ```
 
-## Verify Installation
+This feature is really hacky, and based off of removing whitespace before lines (via regex 🙀). So if you need beginning whitespace preserved in any area, this feature will not work for you.
 
-Once you've got a file named `.md.erb` in your mailer directory, I recommend verifing the format in your browser in development using a tool such as [mail_view](https://github.com/basecamp/mail_view). You can toggle between html and text at the top to make sure both look like you expect.
+In the future I hope to have a better way of doing this, but for now it's all you get.
 
 ## Configure Markdown Renderer
 
