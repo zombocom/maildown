@@ -1,3 +1,7 @@
+## 2.0.3
+
+- Add support for using a different template for HTML and TEXT parts of the markdown email. Enable with `Maildown.enable_layouts = true`.
+
 ## 2.0.2
 
 - Add support for "allow indentation". When `Maildown.allow_indentation = true`. This allows erb markdown templates to be indented but disables blockquotes via spaces. More information is available in the readme.

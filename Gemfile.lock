@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    maildown (2.0.2)
+    maildown (2.0.3)
       actionmailer (>= 4.0.0)
       kramdown
 
@@ -41,7 +41,7 @@ GEM
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     i18n (0.7.0)
-    kramdown (1.15.0)
+    kramdown (1.16.2)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.7.0)
