@@ -14,7 +14,7 @@ module Maildown
     @enable_layouts
   end
 
-  def enable_layouts=(enable_layouts)
+  def self.enable_layouts=(enable_layouts)
     @enable_layouts = enable_layouts
   end
 end
