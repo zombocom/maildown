@@ -2,6 +2,18 @@ require 'test_helper'
 
 class LayoutsTest < ActionMailer::TestCase
 
+  def test_disable_indentation
+    begin
+      Maildown.allow_indentation = true
+      email = UserNoLayoutMailer.leading_whitespace.deliver_now
+      assert !ActionMailer::Base.deliveries.empty?
+      body_contents = /^## Welcome!/
+      assert_match body_contents, email.text_part.body.to_s
+    ensure
+      Maildown.allow_indentation = false
+    end
+  end
+
   def test_no_layout
     email = UserNoLayoutMailer.welcome.deliver_now
     assert !ActionMailer::Base.deliveries.empty?
