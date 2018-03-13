@@ -8,9 +8,6 @@ module Maildown
       md_response = @responses.detect {|r| r[:content_type] == Mime[:md].to_s }
       if md_response
         @string = md_response[:body]
-        # Match beginning whitespace but not newline http://rubular.com/r/uCXQ58OOC8
-        @string.gsub!(/^[^\S\n]+/, ''.freeze) if Maildown.allow_indentation
-
         @responses.delete(md_response)
       end
     end
