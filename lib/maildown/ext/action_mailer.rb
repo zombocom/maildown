@@ -1,34 +1,54 @@
+# frozen_string_literal: true
+
 require 'action_mailer'
+require 'action_mailer/base'
 
-mail_view_klass = ActionMailer::Base.view_context_class
-mail_view_klass.default_formats = (mail_view_klass.default_formats << :md)
-Mime::Type.register "text/md", :md, [], %w(md)
-
+# Monkeypatch to allow mailer to auto generate text/html
+#
+# If you generate a mailer action, by default it will only
+# render an html email:
+#
+#   def welcome
+#     mail(
+#       to:       "foo@example.com",
+#       reply_to: "noreply@schneems.com",
+#       subject:  "hello world"
+#     )
+#   end
+#
+# You can add a format block to have it produce html
+# and text emails:
+#
+#   def welcome
+#     mail(
+#       to:       "foo@example.com",
+#       reply_to: "noreply@schneems.com",
+#       subject:  "hello world"
+#     ) do |format|
+#      format.text
+#      format.html
+#    end
+#   end
+#
+# For the handler to work correctly and produce both HTML
+# and text emails this would need to be required similar to
+# how https://github.com/plataformatec/markerb works.
+#
+# This monkeypatch detects when a markdown email is being
+# used and generates both a markdown and text template
 class ActionMailer::Base
-  alias :original_collect_responses :collect_responses
+  alias :original_each_template :each_template
 
-  def collect_responses(*args, &block)
-    responses = original_collect_responses(*args, &block)
-    md = ::Maildown::Md.new(responses)
-    if md.contains_md?
-      rendered_response = md.to_responses
+  def each_template(paths, name, &block)
+    templates = original_each_template(paths, name, &block)
 
-      if Maildown.enable_layouts
-        text = rendered_response[0]
-        html = rendered_response[1]
+    return templates if templates.first.handler != Maildown::Handlers::Markdown
 
-        layout_name   = _layout(text[:content_type])
-        text[:layout] = "#{layout_name}.text.erb"
-        text[:body]   = render(text)
+    html_template = templates.first
+    text_template = html_template.dup
+    formats = html_template.formats.dup.tap { |f| f.delete(:html) }
 
-        layout_name   = _layout(html[:content_type])
-        html[:layout] = "#{layout_name}.html.erb"
-        html[:body]   = render(html)
-      end
-
-      return rendered_response
-    else
-      return responses
-    end
+    text_template.formats = formats
+    return [html_template, text_template]
   end
 end

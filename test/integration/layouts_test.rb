@@ -17,7 +17,6 @@ class LayoutsTest < ActionMailer::TestCase
   end
 
   def test_layout_renders_fine
-    Maildown.enable_layouts = true
     email = UserWithLayoutMailer.welcome.deliver_now
     assert !ActionMailer::Base.deliveries.empty?
     # Test the body of the sent email contains what we expect it to
@@ -29,7 +28,5 @@ class LayoutsTest < ActionMailer::TestCase
 
     body_contents = /TEXT## Welcome!/
     assert_match body_contents,       email.text_part.body.to_s
-  ensure
-    Maildown.enable_layouts = false
   end
 end
