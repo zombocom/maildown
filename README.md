@@ -2,6 +2,8 @@
 
 [Markdown](http://daringfireball.net/projects/markdown/syntax) for your ActionMailer generated emails. Supports Rails 5.0+
 
+Also due to the way it's implemented it extends markdown support for any other view you want to look for. It could be called `markdown-rails` or something, but this is what I named the gem and I'm sticking with it.
+
 [![Build Status](https://travis-ci.org/schneems/maildown.svg?branch=schneems%2F2.0.0)](https://travis-ci.org/schneems/maildown)
 [![Help Contribute to Open Source](https://www.codetriage.com/schneems/maildown/badges/users.svg)](https://www.codetriage.com/schneems/maildown)
 
@@ -25,25 +27,35 @@ Then run `$ bundle install`
 
 ## Use
 
-In your `app/views/<mailer>` directory create a file with a `.md.erb` extension. When rails renders the email, it will generate html by parsing the markdown, and generate plain text by sending the email as is.
+In your `app/views/<mailer>` directory create a file with a `.md`, `.md+erb` or `.md.erb` extension. When Rails renders the email, it will generate html by parsing the markdown, and generate plain text by sending the email as is.
+
+Also if you skipped the part above, templates with these extensions can also be used outside of mail for example you can have `app/views/welcome/index.md.erb` and it should work.
 
 ## Verify Installation
 
 Once you've got a file named `.md.erb` in your mailer directory, I recommend verifing the format in your browser in development using a tool such as [mail_view](https://github.com/basecamp/mail_view). You can toggle between html and text at the top to make sure both look like you expect.
 
-## Advanced Features
+If you're going to try style HTML emails take a look at [premailer-rails](https://github.com/fphilipe/premailer-rails).
 
-### Different HTML/Text Layouts
+## Upgrading to version 3.0
 
-The way layouts work with the Rails mailer is they're based on your content type. Since our source file is a `.md.erb` it will automatically use a markdown layout as well. That's fine if you want a markdown layout, but what if you want to add styles to only your HTML email?
+In 3.0 a lot of the internals were re-tooled to monkeypatch less so they behave more like what you would expect.
 
-Enable this feature and you can use HTML layouts:
+The `Maildown::MarkdownEngine.set` was deprecated and is removed. instead use `Maildown::MarkdownEngine.set_html`.
+
+Layouts are now used by default. This setting is deprecated and does nothing:
 
 ```ruby
 Maildown.enable_layouts = true
 ```
 
-Now in your mailer you can set a layout:
+There is no way to disable layouts via maildown, instead use normal Rails methods, such as moving to a mailer without a layout set.
+
+## Features
+
+### Different HTML/Text Layouts
+
+In your mailer you can set a layout:
 
 ```ruby
 class UserMailer < ActionMailer::Base
@@ -73,7 +85,7 @@ You can leave the text version plain if you want, but don't forget to add a `yie
 <%= yield %>
 ```
 
-This does not currently work with format blocks in your mailer
+This does not currently work with format blocks in your mailer (AFAIK)
 
 ```ruby
 # THIS DOES NOT WORK
@@ -85,12 +97,6 @@ end
 ```
 
 If you need to have different layouts for different views I suggest you make a different mailer.
-
-This layout mechanism may behave differently than you are used to. For example the layout actually gets added after your main view is rendered. This means you cannot mutate variables in your layout and expect that to show up in your view.
-
-Also the ERB template still works in tandem with this feature. However, it gets applied before any HTML or TEXT templates.
-
-This whole library is a giant pile of hacks, so this might not behave as you want.
 
 ### Indentation
 
@@ -121,7 +127,7 @@ Now you can indent your code:
 <% if @write_docs.present? %>
   ## Write Docs
 
-    <% @write_docs.sort_by {|d| d.repo.full_name }.each do |doc| %>
+  <% @write_docs.sort_by {|d| d.repo.full_name }.each do |doc| %>
     **<%= doc.repo.full_name %>** ([source](<%= doc.to_github %>)): [<%= doc.path %>](<%= doc_method_url doc %>)
 
   <% end %>
@@ -134,9 +140,7 @@ If you want to use a code block, you can use backticks instead of indentation:
     This is a code block using backticks
     ```
 
-This feature is really hacky, and based off of removing whitespace before lines (via regex 🙀). So if you need beginning whitespace preserved in any area, this feature will not work for you.
-
-In the future I hope to have a better way of doing this, but for now it's all you get.
+This feature is hacky, and based off of removing whitespace before lines in your template (via regex 🙀).
 
 ## Configure Markdown Renderer
 
@@ -169,7 +173,7 @@ end
 
 ## Helpers in Markdown files
 
-To get great looking emails in both html and plaintext generate your own links like this:
+To get great looking emails in both html and plaintext, generate your own links like this:
 
 ```ruby
 [Your Profile](<%= user_url(@user) %>)
@@ -185,12 +189,19 @@ Bonus: it's shorter!
 
 ## Future
 
-This codebase depends on some metaprogramming to convince Action Mailer to render html and plain text from md. If you've got some ideas on how to add sane hooks into actionmailer to support this functionality more natively ping me [@schneems](https://twitter.com/schneems)
-
+This codebase depends on some metaprogramming to convince Action Mailer to render html and plain text from md. If you've got some ideas on how to add sane hooks into actionmailer to support this functionality more natively ping me [@schneems](https://twitter.com/schneems).
 
 ## Alternative Implementations
 
-There is another project that accomplishes the same thing by plataformatec: [markerb](https://github.com/plataformatec/markerb).
+There is another project that accomplishes roughly the same thing by plataformatec: [markerb](https://github.com/plataformatec/markerb).
+
+Features we have that they don't:
+
+- We support `md`, `md+erb` and `md.erb` file extensions. They only support `markerb` file extension.
+- They require you manually add a block to each mailer with a text and html format, we don't.
+- We allow you to strip templates with `Maildown.allow_indentation`.
+- Their gem is unmaintained, but honestly it's pretty simple and will keep working for some time.
+- We have way more monkeypatches than they do 🙀.
 
 ## License
 

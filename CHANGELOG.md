@@ -1,3 +1,17 @@
+## 3.0.0
+
+In 3.0 a lot of the internals were re-tooled to monkeypatch less so they behave more like what you would expect.
+
+The `Maildown::MarkdownEngine.set` was deprecated and is removed. instead use `Maildown::MarkdownEngine.set_html`.
+
+Layouts are now used by default. This setting is deprecated and does nothing:
+
+```ruby
+Maildown.enable_layouts = true
+```
+
+There is no way to disable layouts via maildown, instead use normal Rails methods, such as moving to a mailer without a layout set.
+
 ## 2.0.3
 
 - Add support for using a different template for HTML and TEXT parts of the markdown email. Enable with `Maildown.enable_layouts = true`.
