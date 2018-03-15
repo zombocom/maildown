@@ -1,3 +1,7 @@
+## 3.0.1
+
+- Fix issue that would cause the text part of emails to not render after the first email was sent #39
+
 ## 3.0.0
 
 In 3.0 a lot of the internals were re-tooled to monkeypatch less so they behave more like what you would expect.
