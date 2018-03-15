@@ -45,10 +45,15 @@ class ActionMailer::Base
     return templates if templates.first.handler != Maildown::Handlers::Markdown
 
     html_template = templates.first
-    text_template = html_template.dup
-    formats = html_template.formats.dup.tap { |f| f.delete(:html) }
+    text_template = html_template.instance_variable_get(:"@maildown_text_template")
+    if text_template.nil?
+      text_template = html_template.dup
+      formats = html_template.formats.dup.tap { |f| f.delete(:html) }
 
-    text_template.formats = formats
+      text_template.formats = formats
+      html_template.instance_variable_set(:"@maildown_text_template", text_template)
+    end
+
     return [html_template, text_template]
   end
 end
