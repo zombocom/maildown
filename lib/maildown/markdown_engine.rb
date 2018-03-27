@@ -49,8 +49,6 @@ module Maildown
     end
 
     def self.default_html_block
-      require 'kramdown' unless defined? Kramdown
-
       ->(string) { Kramdown::Document.new(string).to_html }
     end
 
@@ -59,3 +57,5 @@ module Maildown
     end
   end
 end
+
+Maildown::MarkdownEngine.autoload(:"Kramdown", "kramdown")
