@@ -1,3 +1,8 @@
+## 3.0.2
+
+- Fix race condition maybe? (#41)
+- Fix warning (#42)
+
 ## 3.0.1
 
 - Fix issue that would cause the text part of emails to not render after the first email was sent #39

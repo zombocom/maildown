@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    maildown (3.0.1)
+    maildown (3.0.2)
       actionmailer (>= 4.0.0)
       kramdown
 
