@@ -45,8 +45,9 @@ class ActionMailer::Base
     return templates if templates.first.handler != Maildown::Handlers::Markdown
 
     html_template = templates.first
-    text_template = html_template.instance_variable_get(:"@maildown_text_template")
-    if text_template.nil?
+    if html_template.instance_variable_defined?(:"@maildown_text_template")
+       text_template = html_template.instance_variable_get(:"@maildown_text_template")
+    else
       text_template = html_template.dup
       formats = html_template.formats.dup.tap { |f| f.delete(:html) }
 
