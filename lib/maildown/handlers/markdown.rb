@@ -24,9 +24,14 @@ module Maildown
       # This handler takes care of both text and html email templates
       # by inspectig the available `"formats"` and rendering the
       # markdown to HTML if one of the formats is `:html`.
-      def self.call(template)
+      def self.call(template, source = nil)
+        # The interface of template handlers changed in Rails 6.0 and the
+        # source is passed as an argument. This check is here for compatibility
+        # with Rails 5.0+.
+        source ||= template.source
+
         # Match beginning whitespace but not newline http://rubular.com/r/uCXQ58OOC8
-        template.source.gsub!(/^[^\S\n]+/, ''.freeze) if Maildown.allow_indentation
+        source.gsub!(/^[^\S\n]+/, ''.freeze) if Maildown.allow_indentation
 
         compiled_source = erb_handler.call(template)
 
