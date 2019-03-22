@@ -1,3 +1,7 @@
+## 3.0.3
+
+- Remove an Action View deprecation in Rails 6 (https://github.com/schneems/maildown/pull/45)
+
 ## 3.0.2
 
 - Fix race condition maybe? (#41)

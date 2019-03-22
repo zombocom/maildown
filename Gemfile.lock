@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    maildown (3.0.2)
+    maildown (3.0.3)
       actionmailer (>= 4.0.0)
       kramdown
 
@@ -43,18 +43,18 @@ GEM
     concurrent-ruby (1.0.5)
     crass (1.0.3)
     erubi (1.7.1)
-    globalid (0.4.1)
+    globalid (0.4.2)
       activesupport (>= 4.2.0)
     i18n (0.9.5)
       concurrent-ruby (~> 1.0)
-    kramdown (1.16.2)
+    kramdown (2.1.0)
     loofah (2.2.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
-    mail (2.7.0)
+    mail (2.7.1)
       mini_mime (>= 0.1.1)
     method_source (0.9.0)
-    mini_mime (1.0.0)
+    mini_mime (1.0.1)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
     nokogiri (1.8.2)
@@ -91,4 +91,4 @@ DEPENDENCIES
   sqlite3
 
 BUNDLED WITH
-   1.17.1
+   2.0.2
