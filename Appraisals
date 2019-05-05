@@ -15,4 +15,5 @@ end
 
 appraise "rails-head" do
   gem "rails", git: "https://github.com/rails/rails.git"
+  gem "sqlite3", "~> 1.4"
 end
