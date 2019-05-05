@@ -1,6 +1,9 @@
 language: ruby
 sudo: false
 
+before_install:
+  - gem install bundler --no-document
+
 rvm:
   - 2.3.8
   - 2.4.6
