@@ -1,7 +1,31 @@
 language: ruby
 sudo: false
 
+before_install:
+  - gem update --system
+  - gem --version
+  - gem install bundler --no-document
+
 rvm:
-  - 2.3.6
-  - 2.4.3
-  - 2.5.0
+  - 2.3.8
+  - 2.4.6
+  - 2.5.5
+  - 2.6.3
+  - ruby-head
+
+gemfile:
+  - gemfiles/rails_5.gemfile
+  - gemfiles/rails_51.gemfile
+  - gemfiles/rails_52.gemfile
+  - gemfiles/rails_head.gemfile
+
+matrix:
+  exclude:
+    - rvm: 2.3.8
+      gemfile: gemfiles/rails_head.gemfile
+    - rvm: 2.4.6
+      gemfile: gemfiles/rails_head.gemfile
+  allow_failures:
+    - rvm: ruby-head
+    - gemfile: gemfiles/rails_head.gemfile
+  fast_finish: true
