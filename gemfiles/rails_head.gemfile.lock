@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/rails/rails.git
-  revision: ac1ba44f8d46ebbbe6889629d263e5690631f6a1
+  revision: 85a8bc644be69908f05740a5886ec19cd3679df5
   specs:
     actioncable (6.1.0.alpha)
       actionpack (= 6.1.0.alpha)
@@ -133,7 +133,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sqlite3 (1.4.1)
     thor (0.20.3)
     thread_safe (0.3.6)
     tzinfo (1.2.5)
@@ -152,7 +151,6 @@ DEPENDENCIES
   rails!
   railties
   rake
-  sqlite3
 
 BUNDLED WITH
    1.16.1
