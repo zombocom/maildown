@@ -46,8 +46,7 @@ class ActionMailer::Base
 
     if Rails.version > "6"
       html_template = templates.first
-      p html_template.format
-      p "---??" * 10
+
       if html_template.instance_variable_defined?(:"@maildown_text_template")
         text_template = html_template.instance_variable_get(:"@maildown_text_template")
       else
