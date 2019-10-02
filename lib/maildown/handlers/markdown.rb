@@ -30,27 +30,22 @@ module Maildown
         # with Rails 5.0+.
         source ||= template.source
 
-        # Match beginning whitespace but not newline http://rubular.com/r/uCXQ58OOC8
+        # Match beginning whitespace but not newline
+        # http://rubular.com/r/uCXQ58OOC8
         source.gsub!(/^[^\S\n]+/, ''.freeze) if Maildown.allow_indentation
 
-        compiled_source = if Rails.version > "6"
-                            erb_handler.call(template, source)
-                          else
-                            erb_handler.call(template)
-                          end
-
-        if Rails.version > "6"
-          if template.format == :html
-            "Maildown::MarkdownEngine.to_html(begin;#{compiled_source}; end)"
-          else
-            "Maildown::MarkdownEngine.to_text(begin;#{compiled_source}; end)"
-          end
+        if Maildown.rails_6?
+          compiled_source = erb_handler.call(template, source)
+          is_html = (template.format != :text)
         else
-          if template.formats.include?(:html)
-            "Maildown::MarkdownEngine.to_html(begin;#{compiled_source}; end)"
-          else
-            "Maildown::MarkdownEngine.to_text(begin;#{compiled_source}; end)"
-          end
+          compiled_source = erb_handler.call(template)
+          is_html = template.formats.include?(:html)
+        end
+
+        if is_html
+          "Maildown::MarkdownEngine.to_html(begin;#{compiled_source}; end)"
+        else
+          "Maildown::MarkdownEngine.to_text(begin;#{compiled_source}; end)"
         end
       end
     end
