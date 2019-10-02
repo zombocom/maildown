@@ -203,6 +203,21 @@ Features we have that they don't:
 - Their gem is unmaintained, but honestly it's pretty simple and will keep working for some time.
 - We have way more monkeypatches than they do 🙀.
 
+
+## Test
+
+We use the appraisal gem to generate Gemfiles. Install all dependencies with this:
+
+```
+$ appraisal install
+```
+
+Run a specific suite like this:
+
+```
+$ BUNDLE_GEMFILE=gemfiles/rails_6.gemfile bundle exec rake test
+```
+
 ## License
 
 MIT
