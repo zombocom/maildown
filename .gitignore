@@ -9,3 +9,4 @@ test/dummy/.sass-cache
 *.gem
 .ruby-version
 .DS_Store
+Gemfile.lock

@@ -45,15 +45,31 @@ class ActionMailer::Base
     return templates if templates.first.handler != Maildown::Handlers::Markdown
 
     html_template = templates.first
+
+    # Cached template is already defined
     if html_template.instance_variable_defined?(:"@maildown_text_template")
-       text_template = html_template.instance_variable_get(:"@maildown_text_template")
+      text_template = html_template.instance_variable_get(:"@maildown_text_template")
+      return [html_template, text_template]
+    end
+
+    if Maildown.rails_6?
+      text_template = html_template
+        .class
+        .new(
+          html_template.source,
+          html_template.identifier,
+          html_template.handler,
+          format: :text,
+          locals: html_template.locals
+        )
     else
       text_template = html_template.dup
       formats = html_template.formats.dup.tap { |f| f.delete(:html) }
 
       text_template.formats = formats
-      html_template.instance_variable_set(:"@maildown_text_template", text_template)
     end
+
+    html_template.instance_variable_set(:"@maildown_text_template", text_template)
 
     return [html_template, text_template]
   end

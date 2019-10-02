@@ -11,14 +11,8 @@ module Maildown
     @allow_indentations = allow_indentations
   end
 
-  def self.enable_layouts
-    puts "Maildown.enable_layouts is deprecated, setting this does nothing"
-    @enable_layouts
-  end
-
-  def self.enable_layouts=(enable_layouts)
-    puts "Maildown.enable_layouts= is deprecated, setting this does nothing"
-    @enable_layouts = enable_layouts
+  def self.rails_6?
+    @rails_6 ||= Rails.version > "6"
   end
 end
 

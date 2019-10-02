@@ -1,3 +1,7 @@
+## 3.1.0
+
+- Support for Rails 6 (https://github.com/schneems/maildown/pull/50)
+
 ## 3.0.3
 
 - Remove an Action View deprecation in Rails 6 (https://github.com/schneems/maildown/pull/45)

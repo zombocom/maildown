@@ -13,6 +13,11 @@ appraise "rails-52" do
   gem "sqlite3", "~> 1.3.6"
 end
 
+appraise "rails-6" do
+  gem "rails", "6.0.0"
+  gem "sqlite3", "~> 1.4"
+end
+
 appraise "rails-head" do
   gem "rails", git: "https://github.com/rails/rails.git"
   gem "sqlite3", "~> 1.4"
