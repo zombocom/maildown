@@ -17,10 +17,15 @@ gemfile:
   - gemfiles/rails_5.gemfile
   - gemfiles/rails_51.gemfile
   - gemfiles/rails_52.gemfile
+  - gemfiles/rails_6.gemfile
   - gemfiles/rails_head.gemfile
 
 matrix:
   exclude:
+    - rvm: 2.3.8
+      gemfile: gemfiles/rails_6.gemfile
+    - rvm: 2.4.6
+      gemfile: gemfiles/rails_6.gemfile
     - rvm: 2.3.8
       gemfile: gemfiles/rails_head.gemfile
     - rvm: 2.4.6

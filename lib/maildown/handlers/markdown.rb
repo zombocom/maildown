@@ -33,12 +33,24 @@ module Maildown
         # Match beginning whitespace but not newline http://rubular.com/r/uCXQ58OOC8
         source.gsub!(/^[^\S\n]+/, ''.freeze) if Maildown.allow_indentation
 
-        compiled_source = erb_handler.call(template)
+        compiled_source = if Rails.version > "6"
+                            erb_handler.call(template, source)
+                          else
+                            erb_handler.call(template)
+                          end
 
-        if template.formats.include?(:html)
-          return "Maildown::MarkdownEngine.to_html(begin;#{compiled_source}; end)"
+        if Rails.version > "6"
+          if template.format == :html
+            "Maildown::MarkdownEngine.to_html(begin;#{compiled_source}; end)"
+          else
+            "Maildown::MarkdownEngine.to_text(begin;#{compiled_source}; end)"
+          end
         else
-          return "Maildown::MarkdownEngine.to_text(begin;#{compiled_source}; end)"
+          if template.formats.include?(:html)
+            "Maildown::MarkdownEngine.to_html(begin;#{compiled_source}; end)"
+          else
+            "Maildown::MarkdownEngine.to_text(begin;#{compiled_source}; end)"
+          end
         end
       end
     end
@@ -61,4 +73,3 @@ ActionView::Template.register_template_handler :"md",     Maildown::Handlers::Ma
 # to allow rails to even attempt to process the file, it needs this
 # handler with ".md.erb" to be registered.
 ActionView::Template.register_template_handler :"md.erb", Maildown::Handlers::Markdown
-
