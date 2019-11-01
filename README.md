@@ -4,7 +4,7 @@
 
 Also due to the way it's implemented it extends markdown support for any other view you want to look for. It could be called `markdown-rails` or something, but this is what I named the gem and I'm sticking with it.
 
-[![Build Status](https://travis-ci.org/schneems/maildown.svg?branch=schneems%2F2.0.0)](https://travis-ci.org/schneems/maildown)
+[![Build Status](https://travis-ci.org/codetriage/maildown.svg?branch=schneems%2F2.0.0)](https://travis-ci.org/schneems/maildown)
 [![Help Contribute to Open Source](https://www.codetriage.com/schneems/maildown/badges/users.svg)](https://www.codetriage.com/schneems/maildown)
 
 ## What?
