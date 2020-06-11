@@ -38,6 +38,7 @@ class MarkdownEngineTest < ActiveSupport::TestCase
   test "handles code fences (GFM)" do
     markdown = "```\nbar\n```"
 
-    assert_equal "<pre><code>bar\n</code></pre>", Maildown::MarkdownEngine.to_html(markdown)
+    actual = Maildown::MarkdownEngine.to_html(markdown)
+    assert_equal "<pre><code>bar\n</code></pre>\n", actual
   end
 end

@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
   s.add_dependency "kramdown-parser-gfm"
 
   s.add_development_dependency "railties"
+  s.add_development_dependency "m"
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rake"
 end
