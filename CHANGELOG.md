@@ -1,3 +1,7 @@
+## 3.2.0
+
+- Switch to "github style markdown" (https://github.com/codetriage/maildown/pull/54)
+
 ## 3.1.0
 
 - Support for Rails 6 (https://github.com/schneems/maildown/pull/50)
