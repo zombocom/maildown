@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'action_mailer'
-require 'action_mailer/base'
-
 # Monkeypatch to allow mailer to auto generate text/html
 #
 # If you generate a mailer action, by default it will only
