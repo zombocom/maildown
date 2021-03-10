@@ -1,3 +1,7 @@
+## 3.3.0
+
+- Delay loading of ActionMailer to fix support for `delivery_job` config (https://github.com/codetriage/maildown/pull/56)
+
 ## 3.2.0
 
 - Switch to "github style markdown" (https://github.com/codetriage/maildown/pull/54)
