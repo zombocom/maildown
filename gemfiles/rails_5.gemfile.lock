@@ -1,7 +1,7 @@
 PATH
   remote: ..
   specs:
-    maildown (3.1.0)
+    maildown (3.2.0)
       actionmailer (>= 4.0.0)
       kramdown-parser-gfm
 
@@ -58,7 +58,7 @@ GEM
       activesupport (>= 4.2.0)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
-    kramdown (2.2.1)
+    kramdown (2.3.0)
       rexml
     kramdown-parser-gfm (1.1.0)
       kramdown (~> 2.0)

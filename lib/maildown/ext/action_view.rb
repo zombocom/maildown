@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'action_view'
-
 # This monkeypatch allows the use of `.md.erb` file extensions
 # in addition to `.md+erb` and `.md`
 module ActionView

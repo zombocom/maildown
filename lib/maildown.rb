@@ -17,6 +17,10 @@ module Maildown
 end
 
 require 'maildown/markdown_engine'
-require 'maildown/ext/action_mailer'
-require 'maildown/ext/action_view'
+ActiveSupport.on_load(:action_mailer) do
+  require 'maildown/ext/action_mailer'
+end
+ActiveSupport.on_load(:action_view) do
+  require 'maildown/ext/action_view'
+end
 require 'maildown/handlers/markdown'
