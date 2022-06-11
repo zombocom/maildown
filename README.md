@@ -1,11 +1,15 @@
 # Maildown
 
-[Markdown](http://daringfireball.net/projects/markdown/syntax) for your ActionMailer-generated emails. Supports Rails 5.0+
+[Markdown](http://daringfireball.net/projects/markdown/syntax) for your ActionMailer-generated emails.
 
 Also due to the way it's implemented it extends markdown support for any other view you want to look for. It could be called `markdown-rails` or something, but this is what I named the gem and I'm sticking with it.
 
 [![Build Status](https://travis-ci.org/codetriage/maildown.svg?branch=schneems%2F2.0.0)](https://travis-ci.org/schneems/maildown)
 [![Help Contribute to Open Source](https://www.codetriage.com/schneems/maildown/badges/users.svg)](https://www.codetriage.com/schneems/maildown)
+
+## Maintenance policy
+
+Follows the Rails maintenance policy https://guides.rubyonrails.org/maintenance_policy.html under "Severe Security Issues". Versions of Rails still under maintenance for Severe Security Issues should be expected to work with Maildown.
 
 ## What?
 
@@ -203,13 +207,12 @@ Features we have that they don't:
 - Their gem is unmaintained, but honestly it's pretty simple and will keep working for some time.
 - We have way more monkeypatches than they do 🙀.
 
-
 ## Test
 
-We use the appraisal gem to generate Gemfiles. Install all dependencies with this:
+We use the [appraisal gem](https://github.com/thoughtbot/appraisal) to generate Gemfiles. Install all dependencies with this:
 
 ```
-$ appraisal install
+$ bundle exec appraisal install
 ```
 
 Run a specific suite like this:
@@ -217,6 +220,8 @@ Run a specific suite like this:
 ```
 $ BUNDLE_GEMFILE=gemfiles/rails_6.gemfile bundle exec rake test
 ```
+
+To add a new test case modify the `Appraisals` file in root and then re-run `bundle exec appraisal install`.
 
 ## License
 
