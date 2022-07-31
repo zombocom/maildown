@@ -1,5 +1,7 @@
 ## HEAD (Unreleased)
 
+## 3.3.1
+
 - Add support for Rails 7 (https://github.com/zombocom/maildown/pull/61)
 
 ## 3.3.0
