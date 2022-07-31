@@ -218,7 +218,7 @@ $ bundle exec appraisal install
 Run a specific suite like this:
 
 ```
-$ BUNDLE_GEMFILE=gemfiles/rails_6.gemfile bundle exec rake test
+$ BUNDLE_GEMFILE=gemfiles/rails_7_0.gemfile bundle exec rake test
 ```
 
 To add a new test case modify the `Appraisals` file in root and then re-run `bundle exec appraisal install`.
