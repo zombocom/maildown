@@ -94,7 +94,7 @@ GIT
 PATH
   remote: ..
   specs:
-    maildown (3.3.0)
+    maildown (3.3.1)
       actionmailer (>= 4.0.0)
       kramdown-parser-gfm
 
