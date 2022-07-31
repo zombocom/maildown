@@ -1,5 +1,7 @@
 ## HEAD (Unreleased)
 
+- Add support for Rails 7 (https://github.com/zombocom/maildown/pull/61)
+
 ## 3.3.0
 
 - Delay loading of ActionMailer to fix support for `delivery_job` config (https://github.com/codetriage/maildown/pull/56)

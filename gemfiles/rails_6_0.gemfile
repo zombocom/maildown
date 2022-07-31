@@ -3,7 +3,8 @@
 source "https://rubygems.org"
 
 gem "appraisal"
-gem "rails", "6.0.0"
+gem "rails", "6.0.5"
 gem "sqlite3", "~> 1.4"
+gem "net-smtp", require: false
 
 gemspec path: "../"
