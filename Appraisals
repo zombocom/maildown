@@ -1,19 +1,19 @@
 appraise "rails_5_2" do
   gem "rails", "5.2.3"
   gem "sqlite3", "~> 1.4"
-  gem 'net-smtp', require: false
+  gem "net-smtp", require: false
 end
 
 appraise "rails_6_0" do
   gem "rails", "6.0.5"
   gem "sqlite3", "~> 1.4"
-  gem 'net-smtp', require: false
+  gem "net-smtp", require: false
 end
 
 appraise "rails_6_1" do
   gem "rails", "6.1.6"
   gem "sqlite3", "~> 1.4"
-  gem 'net-smtp', require: false
+  gem "net-smtp", require: false
 end
 
 appraise "rails_7_0" do

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-require 'action_view'
+
+require "action_view"
 
 module Maildown
   module Handlers
@@ -32,7 +33,7 @@ module Maildown
 
         # Match beginning whitespace but not newline
         # http://rubular.com/r/uCXQ58OOC8
-        source.gsub!(/^[^\S\n]+/, ''.freeze) if Maildown.allow_indentation
+        source.gsub!(/^[^\S\n]+/, "") if Maildown.allow_indentation
 
         if Maildown.rails_6?
           compiled_source = erb_handler.call(template, source)
@@ -55,7 +56,7 @@ end
 # Allows for templates like `contact.md` or `contact.md+erb` to be rendered as
 # markdown.
 ActionView::Template.register_template_handler :"md+erb", Maildown::Handlers::Markdown
-ActionView::Template.register_template_handler :"md",     Maildown::Handlers::Markdown
+ActionView::Template.register_template_handler :md, Maildown::Handlers::Markdown
 
 # Used in conjunction with ext/action_view.rb monkey patch
 # to allow for using the ".md.erb" file "extension".

@@ -34,7 +34,7 @@
 # This monkeypatch detects when a markdown email is being
 # used and generates both a markdown and text template
 class ActionMailer::Base
-  alias :original_each_template :each_template
+  alias_method :original_each_template, :each_template
 
   def each_template(paths, name, &block)
     templates = original_each_template(paths, name, &block)
@@ -44,8 +44,8 @@ class ActionMailer::Base
     html_template = templates.first
 
     # Cached template is already defined
-    if html_template.instance_variable_defined?(:"@maildown_text_template")
-      text_template = html_template.instance_variable_get(:"@maildown_text_template")
+    if html_template.instance_variable_defined?(:@maildown_text_template)
+      text_template = html_template.instance_variable_get(:@maildown_text_template)
       return [html_template, text_template]
     end
 
@@ -66,8 +66,8 @@ class ActionMailer::Base
       text_template.formats = formats
     end
 
-    html_template.instance_variable_set(:"@maildown_text_template", text_template)
+    html_template.instance_variable_set(:@maildown_text_template, text_template)
 
-    return [html_template, text_template]
+    [html_template, text_template]
   end
 end

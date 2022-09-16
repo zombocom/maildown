@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class TemplateHandlerTest < ActionDispatch::IntegrationTest
   def test_strip_whitespace_templates
@@ -12,7 +12,7 @@ class TemplateHandlerTest < ActionDispatch::IntegrationTest
     assert_equal "## Leading\n", email.text_part.body.to_s
 
     assert_equal "text/html", email.html_part.mime_type
-    assert_equal %Q{<h2 id="leading">Leading</h2>\n}, email.html_part.body.to_s
+    assert_equal %(<h2 id="leading">Leading</h2>\n), email.html_part.body.to_s
   ensure
     Maildown.allow_indentation = false
   end

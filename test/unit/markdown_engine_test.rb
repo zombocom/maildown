@@ -1,7 +1,6 @@
-require 'test_helper'
+require "test_helper"
 
 class MarkdownEngineTest < ActiveSupport::TestCase
-
   def setup
     @default_setup = Maildown::MarkdownEngine.html_block
   end
