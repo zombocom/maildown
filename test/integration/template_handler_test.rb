@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class TemplateHandlerTest < ActionDispatch::IntegrationTest
   test ".md template handler" do

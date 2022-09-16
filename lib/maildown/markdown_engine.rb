@@ -58,4 +58,4 @@ module Maildown
   end
 end
 
-Maildown::MarkdownEngine.autoload(:"Kramdown", "kramdown")
+Maildown::MarkdownEngine.autoload(:Kramdown, "kramdown")

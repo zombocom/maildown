@@ -3,9 +3,9 @@ class UserWithLayoutMailer < ApplicationMailer
 
   def welcome
     mail(
-      to:       "foo@example.com",
+      to: "foo@example.com",
       reply_to: "noreply@schneems.com",
-      subject:  "hello world"
+      subject: "hello world"
     )
   end
 end
