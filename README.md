@@ -215,6 +215,12 @@ We use the [appraisal gem](https://github.com/thoughtbot/appraisal) to generate 
 $ bundle exec appraisal install
 ```
 
+Get more info on other commands with:
+
+```
+$ bundle exec appraisal --help
+```
+
 Run a specific suite like this:
 
 ```
