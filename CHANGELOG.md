@@ -1,5 +1,9 @@
 ## HEAD (Unreleased)
 
+## 4.0.0
+
+- Remove support for Rails < 6  to minimize tech debt (https://github.com/zombocom/maildown/pull/70)
+
 ## 3.3.1
 
 - Add support for Rails 7 (https://github.com/zombocom/maildown/pull/61)

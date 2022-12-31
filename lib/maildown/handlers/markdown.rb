@@ -25,22 +25,12 @@ module Maildown
       # by inspectig the available `"formats"` and rendering the
       # markdown to HTML if one of the formats is `:html`.
       def self.call(template, source = nil)
-        # The interface of template handlers changed in Rails 6.0 and the
-        # source is passed as an argument. This check is here for compatibility
-        # with Rails 5.0+.
-        source ||= template.source
-
         # Match beginning whitespace but not newline
         # http://rubular.com/r/uCXQ58OOC8
         source.gsub!(/^[^\S\n]+/, ''.freeze) if Maildown.allow_indentation
 
-        if Maildown.rails_6?
-          compiled_source = erb_handler.call(template, source)
-          is_html = (template.format != :text)
-        else
-          compiled_source = erb_handler.call(template)
-          is_html = template.formats.include?(:html)
-        end
+        compiled_source = erb_handler.call(template, source)
+        is_html = (template.format != :text)
 
         if is_html
           "Maildown::MarkdownEngine.to_html(begin;#{compiled_source}; end)"
@@ -60,7 +50,7 @@ ActionView::Template.register_template_handler :"md",     Maildown::Handlers::Ma
 # Used in conjunction with ext/action_view.rb monkey patch
 # to allow for using the ".md.erb" file "extension".
 #
-# Rails only considers the last part of the file extension
+# Rails < 7 only considers the last part of the file extension
 # i.e the "erb" from "md.erb" to be an extension.
 #
 # The monkeypatch in `ext/action_view.rb` detects "md.erb" and converts
