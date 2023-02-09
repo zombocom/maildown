@@ -1,7 +1,7 @@
 PATH
   remote: ..
   specs:
-    maildown (3.3.1)
+    maildown (4.0.0)
       actionmailer (>= 4.0.0)
       kramdown-parser-gfm
 
@@ -158,6 +158,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin-20
+  x86_64-darwin-21
   x86_64-linux
 
 DEPENDENCIES
@@ -171,4 +172,4 @@ DEPENDENCIES
   sqlite3 (~> 1.4)
 
 BUNDLED WITH
-   2.3.15
+   2.3.26

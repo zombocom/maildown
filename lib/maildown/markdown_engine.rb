@@ -10,7 +10,6 @@ module Maildown
   #
   # For example, if you wanted to use Redcarpet you could set it like this:
   #
-  #
   #   Maildown::MarkdownEngine.set_html do |text|
   #     carpet = Redcarpet::Markdown.new(Redcarpet::Render::HTML, {})
   #     carpet.render(text).html_safe

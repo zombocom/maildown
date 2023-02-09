@@ -94,7 +94,7 @@ GIT
 PATH
   remote: ..
   specs:
-    maildown (3.3.1)
+    maildown (4.0.0)
       actionmailer (>= 4.0.0)
       kramdown-parser-gfm
 
@@ -185,4 +185,4 @@ DEPENDENCIES
   sqlite3 (~> 1.4)
 
 BUNDLED WITH
-   2.3.15
+   2.3.26
