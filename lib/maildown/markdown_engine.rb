@@ -20,10 +20,16 @@ module Maildown
     @maildown_markdown_engine_text_block = nil
 
     def self.to_html(string)
+      if string.is_a?(ActionView::OutputBuffer)
+        string = string.to_s
+      end
       html_block.call(string)
     end
 
     def self.to_text(string)
+      if string.is_a?(ActionView::OutputBuffer)
+        string = string.to_s
+      end
       text_block.call(string)
     end
 
